@@ -27,6 +27,6 @@ type TopK interface {
 	// Expelled watches at the expelled items.
 	Expelled() <-chan Item
 
-	// Halve reduces count for the specified scene.
+	// Fading reduces count for the specified scene.
 	Fading()
 }
