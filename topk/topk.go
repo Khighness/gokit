@@ -27,6 +27,6 @@ type TopK interface {
 	// Expelled watches at the expelled items.
 	Expelled() <-chan Item
 
-	// Fading enables or disables decaying count for history items.
-	Fading(enable bool)
+	// Fade enables or disables fading count for history items.
+	Fade(enable bool)
 }

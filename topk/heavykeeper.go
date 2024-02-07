@@ -181,7 +181,7 @@ func (hk *HeavyKeeper) Expelled() <-chan Item {
 	return hk.expelled
 }
 
-func (hk *HeavyKeeper) Fading(enable bool) {
+func (hk *HeavyKeeper) Fade(enable bool) {
 	atomic.StoreInt32(&hk.timeDecayEnable, boolToInt(enable))
 }
 
@@ -189,13 +189,13 @@ func (hk *HeavyKeeper) tick() {
 	for atomic.LoadInt32(&hk.timeDecayEnable) == 1 {
 		select {
 		case <-hk.timeDecayTicker.C:
-			hk.executeFading()
+			hk.executeFade()
 		default:
 		}
 	}
 }
 
-func (hk *HeavyKeeper) executeFading() {
+func (hk *HeavyKeeper) executeFade() {
 	hk.mu.Lock()
 	defer hk.mu.Unlock()
 
@@ -205,7 +205,7 @@ func (hk *HeavyKeeper) executeFading() {
 		}
 	}
 	hk.total /= uint64(hk.timeDecayFactor)
-	hk.minHeap.Fading(hk.timeDecayFactor)
+	hk.minHeap.Fade(hk.timeDecayFactor)
 }
 
 func (hk *HeavyKeeper) expel(item Item) {

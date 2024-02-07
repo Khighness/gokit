@@ -88,8 +88,8 @@ func (h *MinHeap) IsEmpty() bool { return h.Len() == 0 }
 // IsFull checks if the min heap is full.
 func (h *MinHeap) IsFull() bool { return uint32(h.Len()) >= h.K }
 
-// Halve halves the value of all nodes.
-func (h *MinHeap) Fading(factor uint32) {
+// Fade Fades the value of all nodes according to the specified factor.
+func (h *MinHeap) Fade(factor uint32) {
 	for _, node := range h.Nodes {
 		node.Val /= factor
 	}
